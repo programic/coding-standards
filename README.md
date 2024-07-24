@@ -1,2 +1,2 @@
-# code-standards
+# coding-standards
 Programic coding standards
