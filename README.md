@@ -1,5 +1,5 @@
-<h1 style="text-align: center">Programic's Coding Standards 🚀</h1>
-<p style="text-align: center">Welcome to Programic's coding standards. Here we have described our coding guidelines, agreements, best practices and code quality tools.</p>
+<h1 align="center">Programic's Coding Standards 🚀</h1>
+<p align="center">Welcome to Programic's coding standards. Here we have described our coding guidelines, agreements, best practices and code quality tools.</p>
 
 ## ✅ Why use coding standards?
 We created these standards so that we can write code that is consistent, readable, efficient, maintainable and secure. It improves the quality of the code and makes it accessible to every developer. In addition, it prevents common coding errors.
