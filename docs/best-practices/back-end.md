@@ -138,71 +138,70 @@ Move validation from controllers to Request or DTO classes.
 <details>
   <summary>✏️ Code Examples</summary>
 
-```php
-👎 BAD
-public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|unique:posts|max:255',
-        'body' => 'required',
-        'publish_at' => 'nullable|date',
-    ]);
+  ```php
+  👎 BAD
+  public function store(Request $request)
+  {
+      $request->validate([
+          'title' => 'required|unique:posts|max:255',
+          'body' => 'required',
+          'publish_at' => 'nullable|date',
+      ]);
 
-    ...
-}
-```
+      ...
+  }
+  ```
 
-```php
-👍 GOOD
-public function store(PostRequest $request)
-{
-    ...
-}
+  ```php
+  👍 GOOD
+  public function store(PostRequest $request)
+  {
+      ...
+  }
 
-class PostRequest extends Request
-{
-    public function rules(): array
-    {
-        return [
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-            'publish_at' => 'nullable|date',
-        ];
-    }
-}
+  class PostRequest extends Request
+  {
+      public function rules(): array
+      {
+          return [
+              'title' => 'required|unique:posts|max:255',
+              'body' => 'required',
+              'publish_at' => 'nullable|date',
+          ];
+      }
+  }
 
-// OR:
+  // OR:
 
-public function store(PostData $data)
-{
-    ...
-}
+  public function store(PostData $data)
+  {
+      ...
+  }
 
-use Spatie\LaravelData\Data;
+  use Spatie\LaravelData\Data;
 
-class PostData extends Data
-{
-    public function __construct(
-        #[Unique('posts', ignore: new RouteParameterReference('post', 'title'))]
-        public string $title,
-        public string $body,
-        #[After('now')]
-        public string|Carbon $publishAt,
-    ) {
-    }
+  class PostData extends Data
+  {
+      public function __construct(
+          #[Unique('posts', ignore: new RouteParameterReference('post', 'title'))]
+          public string $title,
+          public string $body,
+          #[After('now')]
+          public string|Carbon $publishAt,
+      ) {
+      }
 
 
-    public function rules(): array
-    {
-        return [
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-            'publish_at' => 'nullable|date',
-        ];
-    }
-}
-
-```
+      public function rules(): array
+      {
+          return [
+              'title' => 'required|unique:posts|max:255',
+              'body' => 'required',
+              'publish_at' => 'nullable|date',
+          ];
+      }
+  }
+  ```
 </details>
 
 
@@ -215,24 +214,128 @@ When there is an endpoint that uses the request data, always use a FormRequest i
 <details>
   <summary>✏️ Code Examples</summary>
 
-```php
-👎 BAD
-public function store(StorePostRequest $request)
-{
-    $data = $request->get('name', 'email');
-}
-```
+  ```php
+  👎 BAD
+  public function store(StorePostRequest $request)
+  {
+      $data = $request->get('name', 'email');
+  }
+  ```
 
-```php
-👍 GOOD
-public function store(StorePostRequest $request)
-{
-    // Retrieve the validated input data...
-    $validated = $request->validated();
+  ```php
+  👍 GOOD
+  public function store(StorePostRequest $request)
+  {
+      // Retrieve the validated input data...
+      $validated = $request->validated();
 
-    // Retrieve a portion of the validated input data...
-    $validated = $request->safe()->only(['name', 'email']);
-    $validated = $request->safe()->except(['name', 'email']);
-}
-```
+      // Retrieve a portion of the validated input data...
+      $validated = $request->safe()->only(['name', 'email']);
+      $validated = $request->safe()->except(['name', 'email']);
+  }
+  ```
 </details>
+
+### ⚪ Enum classes
+
+When the number of values for an attribute is fixed and rarely changes, we use an Enum. For example, in the case of a Status of a certain model. The enum should also always contain a return type.
+
+<details>
+  <summary>✏️ Code Examples</summary>
+
+  ```php
+  👎 BAD
+  if ($device->state === 'stand-by') {
+    //
+  }
+  ```
+
+  ```php
+  👍 GOOD
+
+  enum DeviceState : string
+  {
+    case STAND_BY = 'stand-by';
+    case ON = 'on';
+    case OFF = 'off';
+  }
+
+  class Device extends Model {
+    protected $casts = [
+      'type' => DeviceType::class,
+    ];
+  }
+
+  if ($device->state === DeviceState::STAND_BY) {
+    //
+  }
+  ```
+</details>
+
+### ⚪ Don't use `$with` in your model
+Don't use the `$with` `property in your model and only eager load the relationships which are needed in the request.
+
+<details>
+  <summary>✏️ Code Examples</summary>
+
+  ```php
+  👎 BAD
+  class Layout extends Model {
+    protected $with = [
+      'widgets'
+    ];
+  }
+  ```
+
+  ```php
+  👍 GOOD
+  class Layout extends Model {
+    //
+  }
+
+  $layouts = Layout::with('widgets')->get();
+  ```
+</details>
+
+### ⚪ Helper functions over facades
+
+In Laravel you have the possibility to use Facades but often for the same results there are also helper functions. The preference is to use the helper function instead of the Facade.
+
+<details>
+  <summary>✏️ Code Examples</summary>
+
+  ```php
+  👎 BAD
+  public function login() : User {
+    $user = Auth::user();
+
+    return $user;
+  }
+  ```
+
+  ```php
+  👍 GOOD
+  public function login() : User {
+    $user = auth()->user();
+
+    return $user;
+  }
+  ```
+</details>
+
+### ⚪ Writing tests
+
+Each piece of code requires tests. Make sure to follow this rules:
+- Only write code for the file not the underlying tests
+- Make use of datasets, no loops in tests
+- Expect values contain hardcoded values
+- If it's a feature test make sure to use assertStatus as first expectValue
+-
+
+### ⚪ Follow Laravel naming conventions
+
+Follow [PSR standards](https://www.php-fig.org/psr/psr-12/).
+
+Also, follow naming conventions accepted by Laravel community, see:
+https://github.com/alexeymezenin/laravel-best-practices/blob/master/README.md#follow-laravel-naming-conventions
+
