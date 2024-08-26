@@ -323,6 +323,84 @@ In Laravel you have the possibility to use Facades but often for the same result
   ```
 </details>
 
+### ⚪ Spread operator for merging arrays
+
+There are several ways to merge an array. It is preferable to use a [spread operator](https://wiki.php.net/rfc/spread_operator_for_array) for merging an array.
+
+<details>
+  <summary>✏️ Code Examples</summary>
+
+  ```php
+  👎 BAD
+  array_merge($record, [
+    'author' => $member,
+    'establishment' => $establishment,
+  ]);
+  ```
+
+  ```php
+  👍 GOOD
+  $data = [
+      ...$record,
+      'author' => $member,
+      'establishment' => $establishment,
+  ];
+  ```
+</details>
+
+### ⚪ Policies
+
+Make sure to use policies to authorize the request. We use permissions in the policies to determine if an user can handle the request.
+
+<details>
+  <summary>✏️ Code Examples</summary>
+
+  ```php
+  👎 BAD
+  public function update(UpdateArticleRequest $request, Article $article) {
+    abort_unless($user->can('edit articles'), 403);
+  }
+  ```
+
+  ```php
+  👍 GOOD
+  // ArticlePolicy.php
+  class ArticlePolicy
+  {
+      use HandlesAuthorization;
+
+      public function update(User $user, Article $article): bool
+      {
+          return $user->can('articles.edit') && $article->author->is($user);
+      }
+  }
+
+  // AuthServiceProvider.php
+  class AuthServiceProvider extends ServiceProvider
+  {
+      /**
+       * The policy mappings for the application.
+       *
+       * @var array<class-string, class-string>
+       */
+      protected $policies = [
+          Article::class => ArticlePolicy::class,
+          //
+      ];
+  }
+
+
+  // ArticleController.php
+  public function __construct() {
+    $this->authorizeResource(Article::class);
+  }
+
+  public function update(UpdateArticleRequest $request, Article $article) {
+    //
+  }
+  ```
+</details>
+
 ### ⚪ Writing tests
 
 Each piece of code requires tests. Make sure to follow this rules:
@@ -330,7 +408,7 @@ Each piece of code requires tests. Make sure to follow this rules:
 - Make use of datasets, no loops in tests
 - Expect values contain hardcoded values
 - If it's a feature test make sure to use assertStatus as first expectValue
--
+
 
 ### ⚪ Follow Laravel naming conventions
 
