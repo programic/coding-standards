@@ -1,0 +1,3 @@
+[submodule "pro-backend-linting"]
+	path = pro-backend-linting
+	url = git@github.com:programic/pro-backend-linting.git
