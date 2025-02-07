@@ -3,4 +3,4 @@
 	url = git@github.com:programic/pro-backend-linting.git
 [submodule "pro-frontend-linting"]
 	path = pro-frontend-linting
-	url = https://github.com/programic/pro-frontend-linting
+	url = git@github.com:programic/pro-frontend-linting.git
