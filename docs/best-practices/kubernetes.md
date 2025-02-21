@@ -9,14 +9,14 @@ The following settings and rules must be adhered to for all projects running on 
 ## Pod and project configuration
 
 | 💪🏻 Workers               ||
-|-|-|
+|:-|:-|
 | Pod replicas:            | `2`       |
 | Memory requested:        | `256MB`   |
 | Memory limit:            | `2048MB`  |
 | Horizon maxProcesses:    | `1`       |
 
 | ⏱️ Schedulers            ||
-|-|-|
+|:-|:-|
 | Pod replicas:            | `1`       |
 | Memory requested:        | `64MB`    |
 | Memory limit:            | `512MB`   |
@@ -24,14 +24,14 @@ The following settings and rules must be adhered to for all projects running on 
 > ⚠️ The scheduler should only queue tasks for workers and avoid running heavy async scripts itself. This keeps it lightweight while workers handle execution, ensuring scalability and redundancy.
 
 | 👾 Backend               ||
-|-|-|
+|:-|:-|
 | Pod replicas:            | `2`       |
 | Memory requested:        | `128MB`   |
 | Memory limit:            | `1024MB`  |
 | FrankenPHP workers:      | `1`       |
 
 | 🎨 Frontend              ||
-|-|-|
+|:-|:-|
 | Pod replicas:            | `2`       |
 | Memory requested:        | `16MB`    |
 | Memory limit:            | `64MB`    |
