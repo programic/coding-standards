@@ -1,4 +1,5 @@
 # Kubernetes best practices 🤝
+The following settings and rules must be adhered to for all projects running on our Kubernetes cluster.
 
 ## ⚠️ General Rules
 - Minimize the number of threads, processes, or workers in a pod to 1 or as low as possible, and instead, increase the number of Pod replicas. This ensures that the autoscaling and redundancy of the cluster are utilized optimally. For `workers` and `backend` pods, this is already specified below.
