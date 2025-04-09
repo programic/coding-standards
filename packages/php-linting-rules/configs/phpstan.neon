@@ -1,0 +1,41 @@
+includes:
+    - %currentWorkingDirectory%/vendor/larastan/larastan/extension.neon
+    - %currentWorkingDirectory%/vendor/nesbot/carbon/extension.neon
+
+parameters:
+    level: 8
+
+    reportUnmatchedIgnoredErrors: false
+
+    excludePaths:
+        - %currentWorkingDirectory%/boostrap/cache/*
+        - %currentWorkingDirectory%/vendor/*
+        - %currentWorkingDirectory%/storage/*
+        - %currentWorkingDirectory%/ecs.php
+        - %currentWorkingDirectory%/.phpstorm.meta.php
+        - %currentWorkingDirectory%/_ide_helper.php
+        - %currentWorkingDirectory%/_ide_helper_models.php
+
+    ignoreErrors:
+        - identifier: missingType.generics
+        - '#Property .* has no type specified.#'
+        - '#Illuminate\Support\Collection<mixed, mixed>#'
+        - '#^Unsafe usage of new static#'
+        - '#Property .* |Illuminate\Support\Collection<mixed, mixed>#'
+        - '/Parameter #1 \$callback of method .*::each\(\) expects .*/'
+        - '/Parameter #2 \$callback of method .*::when\(\) expects .*/'
+        - '/Parameter #3 \$default of method .*::when\(\) expects .*/'
+        - '/Parameter #1 \$callback of method .*::map\(\) expects .* given/'
+        - '/Parameter #1 \$callback of method .*::filter\(\) expects .* given/'
+        - '/Parameter #1 \$callback of method .*::mapWithKeys\(\) expects .*/'
+        - '/Call to an undefined method Illuminate\\Database\\Eloquent\\Builder::withTrashed\(\)./'
+        - '/Call to an undefined method Illuminate\\Database\\Eloquent\\Relations\\BelongsTo<.*>::withTrashed\(\)./'
+        - '/Return type \(.*\) of method .*::toResponse\(\) should be compatible with return type \(Symfony\\Component\\HttpFoundation\\Response\) of method Illuminate\\Contracts\\Support\\Responsable::toResponse\(\)/'
+        - '/Method App\\Http\\Middleware\\ThrottleRequests::buildException\(\) should return .*/'
+        - '/Return type of call to method .*::map\(\) contains unresolvable type./'
+        - '/Anonymous function should return Illuminate\\Database\\Eloquent\\Builder<Illuminate\\Database\\Eloquent\\Model> but returns Illuminate\\Database\\Eloquent\\Builder<.*>. .*/'
+        - '/Unable to resolve the template type TKey in call to function collect.*/'
+        - '/Unable to resolve the template type TValue in call to function collect.*/'
+        - '/Unable to resolve the template type TValue in call to method static method.*/'
+        - '/Method .* should return .* but returns .* \$this\(.*\)>/'
+        - '/Generic type .* in PHPDoc tag @return does not specify all template types of class Illuminate\\Database\\Eloquent\\Relations.*: TRelatedModel, TDeclaringModel/'

@@ -1,0 +1,23 @@
+{
+  "name": "programic/php-linting-rules",
+  "description": "Shared linting rules for PHP projects",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mike Meijer",
+      "email": "m.meijer@programic.com"
+    },
+    {
+      "name": "Thimon Wentink",
+      "email": "t.wentink@programic.com"
+    }
+  ],
+  "require": {
+    "php": "^8.4",
+    "nunomaduro/larastan": "^3.3"
+  },
+  "suggest": {
+    "tighten/duster": "Use Duster to run all linters and fixers easily in Laravel-style projects"
+  }
+}
