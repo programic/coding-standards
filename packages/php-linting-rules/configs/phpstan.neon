@@ -1,20 +1,23 @@
 includes:
-    - %currentWorkingDirectory%/vendor/larastan/larastan/extension.neon
-    - %currentWorkingDirectory%/vendor/nesbot/carbon/extension.neon
+    - ../vendor/larastan/larastan/extension.neon
+    - ../vendor/nesbot/carbon/extension.neon
 
 parameters:
     level: 8
 
+    paths:
+      - %currentWorkingDirectory%/app
+      - %currentWorkingDirectory%/config
+      - %currentWorkingDirectory%/database
+      - %currentWorkingDirectory%/routes
+      - %currentWorkingDirectory%/tests
+
     reportUnmatchedIgnoredErrors: false
 
     excludePaths:
-        - %currentWorkingDirectory%/boostrap/cache/*
         - %currentWorkingDirectory%/vendor/*
         - %currentWorkingDirectory%/storage/*
-        - %currentWorkingDirectory%/ecs.php
-        - %currentWorkingDirectory%/.phpstorm.meta.php
-        - %currentWorkingDirectory%/_ide_helper.php
-        - %currentWorkingDirectory%/_ide_helper_models.php
+        - %currentWorkingDirectory%/bootstrap/cache/*
 
     ignoreErrors:
         - identifier: missingType.generics

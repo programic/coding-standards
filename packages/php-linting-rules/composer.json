@@ -15,9 +15,11 @@
   ],
   "require": {
     "php": "^8.4",
-    "nunomaduro/larastan": "^3.3"
+    "larastan/larastan": "^3.3"
   },
-  "suggest": {
-    "tighten/duster": "Use Duster to run all linters and fixers easily in Laravel-style projects"
-  }
+  "bin": [
+    "bin/programic-lint",
+    "bin/programic-lint-publish-config",
+    "bin/programic-lint-setup"
+  ]
 }

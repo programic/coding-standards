@@ -1,20 +1,45 @@
+# 🚀 About
+This package is meant to store all the linting rules for PHP projects at Programic.
+It contains the following linting tools at the moment:
+- [Larastan](https://github.com/larastan/larastan)
 
-## Composer Scripts
-Add these to the projects `composer.json`:
+# 🏗️ Installing
 
-```json
-"scripts": {
-  "lint:ecs": "vendor/bin/ecs check src --config vendor/your-vendor/php-linting-rules/ecs/ecs.php",
-  "lint:phpstan": "vendor/bin/phpstan analyse -c vendor/your-vendor/php-linting-rules/phpstan/phpstan.neon",
-  "lint:phpmd": "vendor/bin/phpmd app text vendor/your-vendor/php-linting-rules/phpmd/phpmd.xml",
-  "lint:phpcs": "vendor/bin/phpcs --standard=vendor/your-vendor/php-linting-rules/phpcs/ruleset.xml src"
-}
+## 1. Require the composer package
+```bash
+composer require --dev programic/php-backend-linting
 ```
 
-## Optional: Use Duster
+## 2. Run the setup command
+```bash
+vendor/bin/programic-setup-linting
+```
 
-If you're using Laravel and want a one-command tool to run all checks and fixers, install [Tighten's Duster](https://github.com/tighten/duster-php):
+This command will install the scripts to the consuming project it's `composer.json
+You can override these files if you want to customize the configuration for project specific rules.
+
+> Use `--force` to overwrite existing composer scripts.
+
+## 3. (Optional) Overriding and publishing configuration files
+We try to make configurations so it don't need to be overridden. If you want to override the configuration files, run the following command to publish config to projects root:
+```bash
+vendor/bin/programic-lint-publish-config
+```
+
+The command publishes the following files:
+- `phpstan.neon` - The configuration file for PHPStan
+
+
+> Use `--force` to overwrite existing config files.
+
+# 👷 Usage
+
+After installing running the setup command, you can run the following commands to check your code:
 
 ```bash
-composer require --dev tighten/duster
-vendor/bin/duster
+composer lint
+composer lint:ecs
+```
+
+
+

@@ -1,0 +1,41 @@
+#!/bin/bash
+set -e
+
+FORCE=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --force)
+      FORCE=true
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+echo "🔧  Setting up lint scripts in composer.json..."
+
+add_or_override_script() {
+  local name=$1
+  local command=$2
+
+  if grep -q "\"$name\":" composer.json; then
+    if [ "$FORCE" = true ]; then
+      echo "⚙️  Overriding script '$name'"
+      composer config scripts."$name" "$command"
+    else
+      echo "ℹ️  Script '$name' already exists. Skipping..."
+    fi
+  else
+    echo "➕  Adding script '$name'"
+    composer config scripts."$name" "$command"
+  fi
+}
+
+add_or_override_script "lint" "vendor/bin/programic-lint"
+add_or_override_script "lint:phpstan" "vendor/bin/programic-lint --only=phpstan"
+
+echo "🎉  Linting config setup complete!"

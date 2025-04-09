@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+echo "🔍 Running Programic PHP Linting Rules..."
+
+# Detect project root (assumes this script is called via vendor/bin/lint)
+PROJECT_ROOT="$(pwd)"
+
+# Run PHPStan
+if [ -f "$PROJECT_ROOT/phpstan.neon" ]; then
+  echo "🔎 Running PHPStan with project config..."
+  vendor/bin/phpstan analyse
+else
+  echo "🔎 Running PHPStan with default config..."
+  vendor/bin/phpstan analyse -c vendor/programic/php-linting-rules/configs/phpstan.neon
+fi

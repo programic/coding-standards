@@ -1,0 +1,46 @@
+#!/bin/bash
+set -e
+
+FORCE=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --force)
+      FORCE=true
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+echo "🔍  Checking for existing linting config files..."
+
+STUBS_DIR="vendor/programic/php-linting-rules/stubs"
+
+copy_if_missing() {
+  local filename=$1
+  local dest=$2
+
+  local src="${STUBS_DIR}/${filename}"
+
+  if [ -f "$dest" ]; then
+    if [ "$FORCE" = true ]; then
+      echo "⚠️  $dest already exists. Forcing overwrite..."
+      cp "$src" "$dest"
+      echo "✅  Overwritten $src -> $dest"
+    else
+      echo "⚠️  $dest already exists. Skipping..."
+    fi
+  else
+    cp "$src" "$dest"
+    echo "✅ Copied $src -> $dest"
+  fi
+}
+
+copy_if_missing "phpstan.neon.dist" "phpstan.neon"
+
+
+
