@@ -3,6 +3,7 @@ This package is meant to store all the linting rules for PHP projects at Program
 It contains the following linting tools at the moment:
 - [Larastan](https://github.com/larastan/larastan)
 - [TLint](https://github.com/tighten/tlint)
+- [PHPMD](https://phpmd.org/)
 
 # 🏗️ Installing
 
@@ -30,6 +31,7 @@ vendor/bin/programic-lint-publish-config
 
 The command publishes the following files:
 - `phpstan.neon` - The configuration file for PHPStan
+- `phpmd.xml` - The configuration file for PHPMD
 
 > Use `--force` to overwrite existing config files.
 
@@ -41,6 +43,7 @@ After installing running the setup command, you can run the following commands t
 composer lint
 composer lint:fix
 composer lint:tlint
+composer lint:phpmd
 ```
 
 ## Editor Setup
