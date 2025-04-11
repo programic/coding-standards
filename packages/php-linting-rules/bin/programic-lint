@@ -6,11 +6,49 @@ echo "🔍 Running Programic PHP Linting Rules..."
 # Detect project root (assumes this script is called via vendor/bin/lint)
 PROJECT_ROOT="$(pwd)"
 
+# Parse flags
+ONLY=""
+FIX=false
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --only)
+      ONLY="$2"
+      shift 2
+      ;;
+    --fix)
+      FIX=true
+      shift
+      ;;
+    *)
+      echo "❌ Unknown option: $1"
+      exit 1
+      ;;
+  esac
+done
+
+# Helper to check if a tool is in the comma-separated --only list
+should_run() {
+  [[ -z "$ONLY" || ",$ONLY," == *",$1,"* ]]
+}
+
+# Run TLint
+if should_run "tlint"; then
+  echo "🧪 Running TLint..."
+
+  if [ "$FIX" = true ]; then
+    vendor/bin/tlint format
+  else
+    vendor/bin/tlint
+  fi
+fi
+
 # Run PHPStan
-if [ -f "$PROJECT_ROOT/phpstan.neon" ]; then
-  echo "🔎 Running PHPStan with project config..."
-  vendor/bin/phpstan analyse
-else
-  echo "🔎 Running PHPStan with default config..."
-  vendor/bin/phpstan analyse -c vendor/programic/php-linting-rules/configs/phpstan.neon
+if should_run "phpstan"; then
+  if [ -f "$PROJECT_ROOT/phpstan.neon" ]; then
+    echo "🔎 Running PHPStan with project config..."
+    vendor/bin/phpstan analyse
+  else
+    echo "🔎 Running PHPStan with default config..."
+    vendor/bin/phpstan analyse -c vendor/programic/php-linting-rules/configs/phpstan.neon
+  fi
 fi

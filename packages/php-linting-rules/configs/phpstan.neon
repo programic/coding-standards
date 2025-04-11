@@ -7,12 +7,18 @@ parameters:
 
     paths:
       - %currentWorkingDirectory%/app
-      - %currentWorkingDirectory%/config
       - %currentWorkingDirectory%/database
       - %currentWorkingDirectory%/routes
       - %currentWorkingDirectory%/tests
 
+    noModelMake: true
+    noUnnecessaryCollectionCall: true
+    checkModelProperties: true
+    checkOctaneCompatibility: false
+    checkUnusedViews: false
+    noEnvCallsOutsideOfConfig: true
     reportUnmatchedIgnoredErrors: false
+    checkModelAppends: true
 
     excludePaths:
         - %currentWorkingDirectory%/vendor/*
@@ -42,3 +48,5 @@ parameters:
         - '/Unable to resolve the template type TValue in call to method static method.*/'
         - '/Method .* should return .* but returns .* \$this\(.*\)>/'
         - '/Generic type .* in PHPDoc tag @return does not specify all template types of class Illuminate\\Database\\Eloquent\\Relations.*: TRelatedModel, TDeclaringModel/'
+        - '#Cannot access property \$[a-zA-Z0-9\\_]+ on App\\Models\\User\|null#'
+        - '#Cannot call method [a-zA-Z0-9\\_]+\(\) on App\\Models\\User\|null#'

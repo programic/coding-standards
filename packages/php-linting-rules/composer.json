@@ -15,7 +15,13 @@
   ],
   "require": {
     "php": "^8.4",
-    "larastan/larastan": "^3.3"
+    "larastan/larastan": "^3.3",
+    "tightenco/tlint": "^9.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "ProgramicLint\\Configs\\": "configs/"
+    }
   },
   "bin": [
     "bin/programic-lint",

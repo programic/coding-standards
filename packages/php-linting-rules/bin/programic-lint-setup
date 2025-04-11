@@ -16,6 +16,32 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+echo "🔍  Checking for TLint config file..."
+
+STUBS_DIR="vendor/programic/php-linting-rules/stubs"
+
+copy_if_missing() {
+  local filename=$1
+  local dest=$2
+
+  local src="${STUBS_DIR}/${filename}"
+
+  if [ -f "$dest" ]; then
+    if [ "$FORCE" = true ]; then
+      echo "⚠️  $dest already exists. Forcing overwrite..."
+      cp "$src" "$dest"
+      echo "✅  Overwritten $src -> $dest"
+    else
+      echo "⚠️  $dest already exists. Use '--force' flag to overwrite the existing config. Skipping..."
+    fi
+  else
+    cp "$src" "$dest"
+    echo "✅ Copied $src -> $dest"
+  fi
+}
+
+copy_if_missing "tlint.json.dist" "tlint.json"
+
 echo "🔧  Setting up lint scripts in composer.json..."
 
 add_or_override_script() {
@@ -36,6 +62,8 @@ add_or_override_script() {
 }
 
 add_or_override_script "lint" "vendor/bin/programic-lint"
-add_or_override_script "lint:phpstan" "vendor/bin/programic-lint --only=phpstan"
+add_or_override_script "lint:fix" "vendor/bin/programic-lint --fix"
+add_or_override_script "lint:phpstan" "vendor/bin/programic-lint --only phpstan"
+add_or_override_script "lint:tlint" "vendor/bin/programic-lint --only tlint"
 
 echo "🎉  Linting config setup complete!"
