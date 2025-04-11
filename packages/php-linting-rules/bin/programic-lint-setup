@@ -65,5 +65,6 @@ add_or_override_script "lint" "vendor/bin/programic-lint"
 add_or_override_script "lint:fix" "vendor/bin/programic-lint --fix"
 add_or_override_script "lint:phpstan" "vendor/bin/programic-lint --only phpstan"
 add_or_override_script "lint:tlint" "vendor/bin/programic-lint --only tlint"
+add_or_override_script "lint:phpmd" "vendor/bin/programic-lint --only phpmd"
 
 echo "🎉  Linting config setup complete!"

@@ -52,3 +52,14 @@ if should_run "phpstan"; then
     vendor/bin/phpstan analyse -c vendor/programic/php-linting-rules/configs/phpstan.neon
   fi
 fi
+
+# Run PHPMD
+if should_run "phpmd"; then
+  if [ -f "$PROJECT_ROOT/phpmd.xml" ]; then
+    echo "🔎 Running PHPMD with project config..."
+    vendor/bin/phpmd . text "$PROJECT_ROOT/phpmd.xml" --exclude storage/*,vendor/*
+  else
+    echo "🔎 Running PHPMD with default config..."
+    vendor/bin/phpmd . text vendor/programic/php-linting-rules/configs/phpmd.xml --exclude storage/*,vendor/*
+  fi
+fi
