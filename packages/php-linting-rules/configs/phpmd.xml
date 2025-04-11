@@ -1,0 +1,77 @@
+<ruleset name="CustomHCBMediaRules"
+         xmlns="http://pmd.sf.net/ruleset/1.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://pmd.sf.net/ruleset/1.0.0 http://pmd.sf.net/ruleset_xml_schema.xsd"
+         xsi:noNamespaceSchemaLocation="http://pmd.sf.net/ruleset_xml_schema.xsd">
+
+  <description>
+    Programic ruleset for linting PHP code.
+  </description>
+
+  <!-- Clean Code Rules -->
+  <rule ref="rulesets/cleancode.xml">
+    <include name="IfStatementAssignment" />
+    <include name="DuplicatedArrayKey" />
+    <include name="MissingImport" />
+    <include name="UndefinedVariable" />
+    <include name="ErrorControlOperator" />
+    <include name="Superglobals" />
+
+    <exclude name="BooleanArgumentFlag" />
+    <exclude name="ElseExpression" />
+    <exclude name="StaticAccess" />
+  </rule>
+
+  <!-- Naming Rules -->
+  <rule ref="rulesets/naming.xml">
+    <include name="CamelCaseClassName" />
+    <include name="CamelCasePropertyName" />
+    <include name="CamelCaseParameterName" />
+    <include name="CamelCaseVariableName" />
+    <include name="CamelCaseMethodName"/>
+    <exclude name="LongVariable" />
+    <exclude name="ShortMethodName" />§
+  </rule>
+
+  <!-- Controversial Rules -->
+  <rule ref="rulesets/controversial.xml">
+    <include name="ExitExpression" />
+    <include name="EvalExpression" />
+    <include name="GotoStatement" />
+  </rule>
+
+  <!-- Code Size Rules -->
+  <rule ref="rulesets/codesize.xml">
+    <include name="ExcessiveMethodLength" />
+    <include name="ExcessiveClassLength" />
+    <include name="ExcessiveParameterList" />
+    <include name="ExcessivePublicCount" />
+    <include name="TooManyFields" />
+    <include name="TooManyMethods" />
+    <include name="ExcessiveClassComplexity" />
+
+    <exclude name="CyclomaticComplexity" />
+    <exclude name="TooManyPublicMethods" />
+  </rule>
+
+  <rule ref="rulesets/codesize.xml/CyclomaticComplexity">
+    <properties>
+      <property name="reportLevel" value="15" />
+    </properties>
+  </rule>
+
+  <!-- Unused Code Rules -->
+  <rule ref="rulesets/unusedcode.xml">
+    <include name="UnusedPrivateField" />
+    <include name="UnusedLocalVariable" />
+    <include name="UnusedPrivateMethod" />
+
+    <exclude name="UnusedFormalParameter" />
+  </rule>
+
+  <!-- Design Rules -->
+  <rule ref="rulesets/design.xml">
+    <exclude name="CouplingBetweenObjects" />
+    <exclude name="NumberOfChildren" />
+  </rule>
+</ruleset>

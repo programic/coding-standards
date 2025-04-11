@@ -1,0 +1,70 @@
+#!/bin/bash
+set -e
+
+FORCE=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --force)
+      FORCE=true
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+echo "🔍  Checking for TLint config file..."
+
+STUBS_DIR="vendor/programic/php-linting-rules/stubs"
+
+copy_if_missing() {
+  local filename=$1
+  local dest=$2
+
+  local src="${STUBS_DIR}/${filename}"
+
+  if [ -f "$dest" ]; then
+    if [ "$FORCE" = true ]; then
+      echo "⚠️  $dest already exists. Forcing overwrite..."
+      cp "$src" "$dest"
+      echo "✅  Overwritten $src -> $dest"
+    else
+      echo "⚠️  $dest already exists. Use '--force' flag to overwrite the existing config. Skipping..."
+    fi
+  else
+    cp "$src" "$dest"
+    echo "✅ Copied $src -> $dest"
+  fi
+}
+
+copy_if_missing "tlint.json.dist" "tlint.json"
+
+echo "🔧  Setting up lint scripts in composer.json..."
+
+add_or_override_script() {
+  local name=$1
+  local command=$2
+
+  if grep -q "\"$name\":" composer.json; then
+    if [ "$FORCE" = true ]; then
+      echo "⚙️  Overriding script '$name'"
+      composer config scripts."$name" "$command"
+    else
+      echo "ℹ️  Script '$name' already exists. Skipping..."
+    fi
+  else
+    echo "➕  Adding script '$name'"
+    composer config scripts."$name" "$command"
+  fi
+}
+
+add_or_override_script "lint" "vendor/bin/programic-lint"
+add_or_override_script "lint:fix" "vendor/bin/programic-lint --fix"
+add_or_override_script "lint:phpstan" "vendor/bin/programic-lint --only phpstan"
+add_or_override_script "lint:tlint" "vendor/bin/programic-lint --only tlint"
+add_or_override_script "lint:phpmd" "vendor/bin/programic-lint --only phpmd"
+
+echo "🎉  Linting config setup complete!"

@@ -1,0 +1,4 @@
+{
+  "preset": "ProgramicLint\\Configs\\TLintPreset",
+  "excluded": ["bootstrap/", "vendor/"],
+}
