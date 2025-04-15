@@ -63,3 +63,21 @@ if should_run "phpmd"; then
     vendor/bin/phpmd . text vendor/programic/php-linting-rules/configs/phpmd.xml --exclude storage/*,vendor/*
   fi
 fi
+
+# Run PHPMD
+# Run ECS
+if should_run "ecs"; then
+  if [ -f "$PROJECT_ROOT/ecs.php" ]; then
+    echo "🔎 Running ECS with project config..."
+    CMD="vendor/bin/ecs --config=$PROJECT_ROOT/ecs.php"
+  else
+    echo "🔎 Running ECS with default config..."
+    CMD="vendor/bin/ecs --config=vendor/programic/php-linting-rules/configs/ecs.php"
+  fi
+
+  if [ "$FIX" = true ]; then
+    CMD="$CMD --fix"
+  fi
+
+  eval "$CMD"
+fi

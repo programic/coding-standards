@@ -43,4 +43,5 @@ copy_if_missing() {
 copy_if_missing "phpstan.neon.dist" "phpstan.neon"
 copy_if_missing "tlint.json.dist" "tlint.json"
 copy_if_missing "phpmd.xml.dist" "phpmd.xml"
+copy_if_missing "ecs.php.dist" "ecs.php"
 

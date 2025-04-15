@@ -4,6 +4,9 @@ It contains the following linting tools at the moment:
 - [Larastan](https://github.com/larastan/larastan)
 - [TLint](https://github.com/tighten/tlint)
 - [PHPMD](https://phpmd.org/)
+- [ECS](https://github.com/easy-coding-standard/easy-coding-standard) with rules from:
+  - [PHP Coding Standards Fixer](https://cs.symfony.com/)
+  - [Slevomat](https://github.com/slevomat/coding-standard)
 
 # 🏗️ Installing
 
