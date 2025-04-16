@@ -33,8 +33,10 @@ vendor/bin/programic-lint-publish-config
 ```
 
 The command publishes the following files:
+- `tlint.json.dist` - The configuration file for TLint
 - `phpstan.neon` - The configuration file for PHPStan
 - `phpmd.xml` - The configuration file for PHPMD
+- `ecs.php` - The configuration file for ECS
 
 > Use `--force` to overwrite existing config files.
 
@@ -47,6 +49,8 @@ composer lint
 composer lint:fix
 composer lint:tlint
 composer lint:phpmd
+composer lint:ecs
+composer lint:ecs:fix
 ```
 
 ## Editor Setup

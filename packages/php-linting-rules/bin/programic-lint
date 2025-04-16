@@ -64,7 +64,6 @@ if should_run "phpmd"; then
   fi
 fi
 
-# Run PHPMD
 # Run ECS
 if should_run "ecs"; then
   if [ -f "$PROJECT_ROOT/ecs.php" ]; then
