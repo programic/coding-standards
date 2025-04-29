@@ -8,6 +8,14 @@ It contains the following linting tools at the moment:
   - [PHP Coding Standards Fixer](https://cs.symfony.com/)
   - [Slevomat](https://github.com/slevomat/coding-standard)
 
+## ✅ Compatibility
+
+| Laravel Version | Minimum PHP Version |
+|-----------------|---------------------|
+| 12.x            | 8.2 - 8.4           |
+| 11.x            | 8.2 - 8.4           |
+
+
 # 🏗️ Installing
 
 ## 1. Require the composer package
