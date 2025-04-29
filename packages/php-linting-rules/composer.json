@@ -14,7 +14,7 @@
     }
   ],
   "require": {
-    "php": "^8.4",
+    "php": "^8.2",
     "larastan/larastan": "^3.3",
     "tightenco/tlint": "^9.5",
     "phpmd/phpmd": "^2.15",
