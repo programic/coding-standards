@@ -29,7 +29,7 @@ vendor/bin/programic-lint-setup
 ```
 
 This command will:
-- Setup the scripts to the consuming project it's `composer.json`
+- Setup the scripts to the consuming project its `composer.json`
 - Brings a `tlint.json` to the workspace root, if not exists. This is required for the package to work properly.
 
 > Use `--force` to overwrite existing composer scripts.
