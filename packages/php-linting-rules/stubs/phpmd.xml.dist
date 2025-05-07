@@ -2,13 +2,5 @@
 <ruleset name="Custom PHPMD Ruleset" xmlns="http://pmd.sourceforge.net/ruleset/1.0.0">
     <rule ref="vendor/programic/php-linting-rules/configs/phpmd.xml"/>
 
-    <!-- Custom rules you want to add or modify -->
-    <description>
-        Custom ruleset that extends the default PHPMD rules.
-    </description>
-
-    <!-- Example: Adding custom rules -->
-    <rule ref="rulesets/basic.xml">
-        <exclude name="UnnecessaryLocalVariable" />
-    </rule>
+    <exclude-pattern>tests/TestCase.php</exclude-pattern>
 </ruleset>

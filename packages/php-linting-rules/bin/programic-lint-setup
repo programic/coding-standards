@@ -16,14 +16,13 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-echo "🔍  Checking for TLint config file..."
+echo "🔍  Setting up PHP linting environment..."
 
 STUBS_DIR="vendor/programic/php-linting-rules/stubs"
 
-copy_if_missing() {
+publish_config_if_missing() {
   local filename=$1
   local dest=$2
-
   local src="${STUBS_DIR}/${filename}"
 
   if [ -f "$dest" ]; then
@@ -32,7 +31,7 @@ copy_if_missing() {
       cp "$src" "$dest"
       echo "✅  Overwritten $src -> $dest"
     else
-      echo "⚠️  $dest already exists. Use '--force' flag to overwrite the existing config. Skipping..."
+      echo "⚠️  $dest already exists. Skipping..."
     fi
   else
     cp "$src" "$dest"
@@ -40,33 +39,17 @@ copy_if_missing() {
   fi
 }
 
-copy_if_missing "tlint.json.dist" "tlint.json"
+publish_config_if_missing "phpstan.neon.dist" "phpstan.neon"
+publish_config_if_missing "tlint.json.dist" "tlint.json"
+publish_config_if_missing "phpmd.xml.dist" "phpmd.xml"
+publish_config_if_missing "ecs.php.dist" "ecs.php"
 
-echo "🔧  Setting up lint scripts in composer.json..."
+echo "🔧  Overwriting Composer scripts..."
 
-add_or_override_script() {
-  local name=$1
-  local command=$2
+composer config scripts.lint:phpstan "vendor/bin/phpstan analyse"
+composer config scripts.lint:tlint "vendor/bin/tlint"
+composer config scripts.lint:phpmd "vendor/bin/phpmd . text phpmd.xml --exclude storage,vendor,_ide_helper.php"
+composer config scripts.lint:ecs "vendor/bin/ecs --config=ecs.php"
+composer config scripts.lint "composer lint:ecs && composer lint:phpmd && composer lint:phpstan && composer lint:tlint"
 
-  if grep -q "\"$name\":" composer.json; then
-    if [ "$FORCE" = true ]; then
-      echo "⚙️  Overriding script '$name'"
-      composer config scripts."$name" "$command"
-    else
-      echo "ℹ️  Script '$name' already exists. Skipping..."
-    fi
-  else
-    echo "➕  Adding script '$name'"
-    composer config scripts."$name" "$command"
-  fi
-}
-
-add_or_override_script "lint" "vendor/bin/programic-lint"
-add_or_override_script "lint:fix" "vendor/bin/programic-lint --fix"
-add_or_override_script "lint:phpstan" "vendor/bin/programic-lint --only phpstan"
-add_or_override_script "lint:tlint" "vendor/bin/programic-lint --only tlint"
-add_or_override_script "lint:phpmd" "vendor/bin/programic-lint --only phpmd"
-add_or_override_script "lint:ecs" "vendor/bin/programic-lint --only ecs"
-add_or_override_script "lint:ecs:fix" "vendor/bin/programic-lint --only ecs --fix"
-
-echo "🎉  Linting config setup complete!"
+echo "🎉  Linting setup complete!"

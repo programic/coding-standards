@@ -30,23 +30,9 @@ vendor/bin/programic-lint-setup
 
 This command will:
 - Setup the scripts to the consuming project it's `composer.json`
-- Brings a `tlint.json` to the workspace root, if not exists. This is required for the package to work properly.
+- Brings the config files to the workspace root, if not exists. This is required for the package to work properly.
 
-> Use `--force` to overwrite existing composer scripts.
-
-## 3. (Optional) Overriding and publishing configuration files
-We try to make configurations so it don't need to be overridden. If you want to override the configuration files, run the following command to publish config to projects root:
-```bash
-vendor/bin/programic-lint-publish-config
-```
-
-The command publishes the following files:
-- `tlint.json.dist` - The configuration file for TLint
-- `phpstan.neon` - The configuration file for PHPStan
-- `phpmd.xml` - The configuration file for PHPMD
-- `ecs.php` - The configuration file for ECS
-
-> Use `--force` to overwrite existing config files.
+> Use `--force` to overwrite configuration files.
 
 # 👷 Usage
 
@@ -54,11 +40,10 @@ After installing running the setup command, you can run the following commands t
 
 ```bash
 composer lint
-composer lint:fix
 composer lint:tlint
 composer lint:phpmd
+composer lint:phpstan
 composer lint:ecs
-composer lint:ecs:fix
 ```
 
 ## Editor Setup

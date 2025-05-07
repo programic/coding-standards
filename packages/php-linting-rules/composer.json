@@ -19,7 +19,7 @@
     "tightenco/tlint": "^9.5",
     "phpmd/phpmd": "^2.15",
     "symplify/easy-coding-standard": "^12.5",
-    "slevomat/coding-standard": "^8.17"
+    "slevomat/coding-standard": "^8.0"
   },
   "autoload": {
     "psr-4": {
@@ -27,8 +27,6 @@
     }
   },
   "bin": [
-    "bin/programic-lint",
-    "bin/programic-lint-publish-config",
     "bin/programic-lint-setup"
   ],
   "config": {
