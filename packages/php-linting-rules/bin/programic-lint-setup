@@ -42,14 +42,16 @@ publish_config_if_missing() {
 publish_config_if_missing "phpstan.neon.dist" "phpstan.neon"
 publish_config_if_missing "tlint.json.dist" "tlint.json"
 publish_config_if_missing "phpmd.xml.dist" "phpmd.xml"
+publish_config_if_missing "phpmd-seeders.xml.dist" "phpmd-seeders.xml"
 publish_config_if_missing "ecs.php.dist" "ecs.php"
 
 echo "🔧  Overwriting Composer scripts..."
 
 composer config scripts.lint:phpstan "vendor/bin/phpstan analyse"
 composer config scripts.lint:tlint "vendor/bin/tlint"
-composer config scripts.lint:phpmd "vendor/bin/phpmd . text phpmd.xml --exclude storage,vendor,_ide_helper.php"
+composer config scripts.lint:phpmd "vendor/bin/phpmd . text phpmd.xml --exclude storage,vendor,_ide_helper.php,_ide_helper_models.php && vendor/bin/phpmd database/seeders text phpmd-seeders.xml"
 composer config scripts.lint:ecs "vendor/bin/ecs --config=ecs.php"
 composer config scripts.lint "composer lint:ecs && composer lint:phpmd && composer lint:phpstan && composer lint:tlint"
+composer config scripts.lint:fix "vendor/bin/tlint format; vendor/bin/ecs --ansi --fix"
 
 echo "🎉  Linting setup complete!"

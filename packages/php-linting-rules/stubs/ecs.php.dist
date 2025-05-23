@@ -3,10 +3,10 @@
 use Symplify\EasyCodingStandard\Config\ECSConfig;
 
 return ECSConfig::configure()
-   ->withPaths([
-       __DIR__ . '/app',
-       __DIR__ . '/tests',
-   ])
-   ->withSets([
-       __DIR__ . '/vendor/programic/php-linting-rules/configs/ecs.php',
-   ]);
+    ->withPaths([
+        __DIR__ . '/app',
+        __DIR__ . '/tests',
+    ])
+    ->withSets([
+        __DIR__ . '/vendor/programic/php-linting-rules/configs/ecs.php',
+    ]);

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<ruleset name="Custom PHPMD Ruleset" xmlns="http://pmd.sourceforge.net/ruleset/1.0.0">
+  <rule ref="vendor/programic/php-linting-rules/configs/phpmd.xml">
+    <exclude name="ExcessiveMethodLength"/>
+    <exclude name="CyclomaticComplexity"/>
+    <exclude name="NPathComplexity"/>
+  </rule>
+</ruleset>

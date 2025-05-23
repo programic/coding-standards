@@ -31,6 +31,13 @@
     <include name="CamelCaseMethodName"/>
     <exclude name="LongVariable" />
     <exclude name="ShortMethodName" />
+    <exclude name="ShortVariable" />
+  </rule>
+
+  <rule ref="rulesets/naming.xml/ShortVariable">
+    <properties>
+      <property name="minimum" value="2" />
+    </properties>
   </rule>
 
   <!-- Controversial Rules -->
