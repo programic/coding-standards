@@ -1,7 +1,7 @@
 includes:
     - %currentWorkingDirectory%/vendor/larastan/larastan/extension.neon
     - %currentWorkingDirectory%/vendor/nesbot/carbon/extension.neon
-
+    - %currentWorkingDirectory%/vendor/phpstan/phpstan-mockery/extension.neon
 
 parameters:
     level: 8
