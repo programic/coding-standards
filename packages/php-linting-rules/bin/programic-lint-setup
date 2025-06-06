@@ -1,0 +1,57 @@
+#!/bin/bash
+set -e
+
+FORCE=false
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --force)
+      FORCE=true
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
+
+echo "🔍  Setting up PHP linting environment..."
+
+STUBS_DIR="vendor/programic/php-linting-rules/stubs"
+
+publish_config_if_missing() {
+  local filename=$1
+  local dest=$2
+  local src="${STUBS_DIR}/${filename}"
+
+  if [ -f "$dest" ]; then
+    if [ "$FORCE" = true ]; then
+      echo "⚠️  $dest already exists. Forcing overwrite..."
+      cp "$src" "$dest"
+      echo "✅  Overwritten $src -> $dest"
+    else
+      echo "⚠️  $dest already exists. Skipping..."
+    fi
+  else
+    cp "$src" "$dest"
+    echo "✅ Copied $src -> $dest"
+  fi
+}
+
+publish_config_if_missing "phpstan.neon.dist" "phpstan.neon"
+publish_config_if_missing "tlint.json.dist" "tlint.json"
+publish_config_if_missing "phpmd.xml.dist" "phpmd.xml"
+publish_config_if_missing "phpmd-seeders.xml.dist" "phpmd-seeders.xml"
+publish_config_if_missing "ecs.php.dist" "ecs.php"
+
+echo "🔧  Overwriting Composer scripts..."
+
+composer config scripts.lint:phpstan "vendor/bin/phpstan analyse"
+composer config scripts.lint:tlint "vendor/bin/tlint"
+composer config scripts.lint:phpmd "vendor/bin/phpmd . text phpmd.xml --exclude storage,vendor,_ide_helper.php,_ide_helper_models.php && vendor/bin/phpmd database/seeders text phpmd-seeders.xml"
+composer config scripts.lint:ecs "vendor/bin/ecs --config=ecs.php"
+composer config scripts.lint "composer lint:ecs && composer lint:phpmd && composer lint:phpstan && composer lint:tlint"
+composer config scripts.lint:fix "vendor/bin/tlint format; vendor/bin/ecs --ansi --fix"
+
+echo "🎉  Linting setup complete!"

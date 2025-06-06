@@ -800,6 +800,34 @@ Each piece of code requires tests. Make sure to follow this rules:
   ```
 </details>
 
+### ⚪ Named arguments
+Named arguments may be used to improve readability, but only when the values passed match the default values defined in the function signature. This makes the intention clearer without overriding behavior.
+Using named arguments when the values are equal to their defaults documents intent and avoids confusion for readers who might assume you're overriding default behavior.
+
+<details>
+  <summary>✏️ Code Examples</summary>
+
+  ```php
+  👎 BAD
+  function createUser(string $name, string $role = 'user', bool $active = true): void
+  {
+      // ...
+  }
+
+  createUser(role: 'admin', name: 'Bob');
+  ```
+
+  ```php
+  👍 GOOD
+  function createUser(string $name, string $role = 'user', bool $active = true): void
+  {
+      // ...
+  }
+
+  createUser(name: 'Alice', active: false);
+  ```
+</details>
+
 ### ⚪ Follow Laravel naming conventions
 
 Follow [PSR standards](https://www.php-fig.org/psr/psr-12/).
