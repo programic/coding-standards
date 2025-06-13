@@ -1,0 +1,9 @@
+{
+  "subtree-splits": [
+    {
+      "name": "php-linting-rules",
+      "directory": "packages/php-linting-rules",
+      "target": "git@github.com:programic/php-linting-rules.git"
+    }
+  ]
+}

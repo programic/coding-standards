@@ -1,0 +1,36 @@
+name: Sync commits with individual packages
+
+on:
+  push:
+    branches:
+      - '*'
+    paths:
+      - packages/**
+    tags-ignore:
+      - '*'
+  create:
+    tags:
+        - '*'
+  delete:
+    tags:
+        - '*'
+
+jobs:
+  sync_commits:
+    runs-on: ubuntu-latest
+    name: Sync Commits
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+      - name: Cache splitsh
+        uses: actions/cache@v4
+        with:
+          path: './splitsh'
+          key: '${{ runner.os }}-splitsh-v101'
+      - name: Subtree split
+        uses: acrobat/subtree-splitter@v1.1.5
+        with:
+          config-path: .github/subtree-splitter.json
+
