@@ -33,20 +33,20 @@ return ECSConfig::configure()
   ->withConfiguredRule(PhpCsFixer\Fixer\Phpdoc\PhpdocTypesOrderFixer::class, ['sort_algorithm' => 'none', 'null_adjustment' => 'always_last', 'case_sensitive' => false])
   ->withConfiguredRule(PhpCsFixer\Fixer\Whitespace\NoExtraBlankLinesFixer::class, ['tokens' => ['use']])
   ->withConfiguredRule(PhpCsFixer\Fixer\Whitespace\TypesSpacesFixer::class, ['space' => 'single', 'space_multiple_catch' => 'single'])
-  ->withConfiguredRule(PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff::class, ['forbiddenFunctions' => ['compact' => null , 'dd' => null, 'dump' => null, 'var_dump' => null, 'ray' => null, 'only' => null]])
+  ->withConfiguredRule(PHP_CodeSniffer\Standards\Generic\Sniffs\PHP\ForbiddenFunctionsSniff::class, ['forbiddenFunctions' => ['compact' => null, 'dd' => null, 'dump' => null, 'var_dump' => null, 'ray' => null, 'only' => null]])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Attributes\AttributeAndTargetSpacingSniff::class, ['linesCount' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\BackedEnumTypeSpacingSniff::class, ['spacesCountBeforeColon' => 0, 'spacesCountBeforeType' => 1])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\ClassMemberSpacingSniff::class, ['linesCountBetweenMembers' => 1])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\ConstantSpacingSniff::class, ['minLinesCountBeforeWithComment' => 1, 'maxLinesCountBeforeWithComment' => 1, 'minLinesCountBeforeWithoutComment' => 0, 'maxLinesCountBeforeWithoutComment' => 0])
-  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\EmptyLinesAroundClassBracesSniff::class, ['linesCountAfterOpeningBrace' => 0, 'linesCountBeforeClosingBrace' => 0])
+  // ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\EmptyLinesAroundClassBracesSniff::class, ['linesCountAfterOpeningBrace' => 0, 'linesCountBeforeClosingBrace' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\EnumCaseSpacingSniff::class, ['minLinesCountBeforeWithComment' => 1, 'maxLinesCountBeforeWithComment' => 1, 'minLinesCountBeforeWithoutComment' => 0, 'maxLinesCountBeforeWithoutComment' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\MethodSpacingSniff::class, ['minLinesCount' => 1, 'maxLinesCount' => 1])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\ParentCallSpacingSniff::class, ['linesCountBefore' => 0, 'linesCountAfter' => 1])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\PropertySpacingSniff::class, ['minLinesCountBeforeWithComment' => 1, 'maxLinesCountBeforeWithComment' => 1, 'minLinesCountBeforeWithoutComment' => 0, 'maxLinesCountBeforeWithoutComment' => 0])
-  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff::class, ['linesCountBeforeFirstUse' => 0, 'linesCountBeforeFirstUseWhenFirstInClass' => 0, 'linesCountBetweenUses' => 0, 'linesCountAfterLastUse' => 1, 'linesCountAfterLastUseWhenLastInClass' => 1])
+  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff::class, ['linesCountBeforeFirstUse' => 0, 'linesCountBeforeFirstUseWhenFirstInClass' => 0, 'linesCountBetweenUses' => 0, 'linesCountAfterLastUse' => 1, 'linesCountAfterLastUseWhenLastInClass' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff::class, ['linesCountBeforeFirstContent' => 0, 'linesCountBetweenDescriptionAndAnnotations' => 1, 'linesCountBetweenDifferentAnnotationsTypes' => 0, 'linesCountAfterLastContent' => 0])
-  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\ControlStructures\BlockControlStructureSpacingSniff::class, ['linesCountBefore' => 1, 'linesCountBeforeFirst' => 1, 'linesCountAfter' => 1, 'linesCountAfterLast' => 1, 'controlStructures' => ['if', 'switch', 'for', 'foreach', 'while', 'do']])
-  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\ControlStructures\JumpStatementsSpacingSniff::class, ['linesCountBefore' => 1, 'linesCountBeforeFirst' => 1, 'linesCountBeforeWhenFirstInCaseOrDefault' => 1, 'linesCountAfter' => 0, 'linesCountAfterLast' => 0, 'linesCountAfterWhenLastInCaseOrDefault' => 0, 'linesCountAfterWhenLastInLastCaseOrDefault' => 0, 'jumpStatements' => ['continue', 'break', 'yield', 'return', 'goto']])
+  // ->withConfiguredRule(SlevomatCodingStandard\Sniffs\ControlStructures\BlockControlStructureSpacingSniff::class, ['linesCountBefore' => 1, 'linesCountBeforeFirst' => 1, 'linesCountAfter' => 1, 'linesCountAfterLast' => 1, 'controlStructures' => ['if', 'switch', 'for', 'foreach', 'while', 'do']])
+  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\ControlStructures\JumpStatementsSpacingSniff::class, ['linesCountBefore' => 1, 'linesCountBeforeFirst' => 0, 'linesCountBeforeWhenFirstInCaseOrDefault' => 1, 'linesCountAfter' => 0, 'linesCountAfterLast' => 0, 'linesCountAfterWhenLastInCaseOrDefault' => 0, 'linesCountAfterWhenLastInLastCaseOrDefault' => 0, 'jumpStatements' => ['continue', 'break', 'yield', 'return', 'goto']])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Files\LineLengthSniff::class, ['lineLengthLimit' => 140])
   // ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Files\TypeNameMatchesFileNameSniff::class, ['rootNamespaces' => ['app' => 'App'], 'skipDirs' => ['database/seeders', 'database/factories', 'tests'] ])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Functions\ArrowFunctionDeclarationSniff::class, ['spacesCountAfterKeyword' => 1, 'spacesCountBeforeArrow' => 1, 'spacesCountAfterArrow' => 1, 'allowMultiLine' => true])
@@ -54,7 +54,7 @@ return ECSConfig::configure()
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Functions\DisallowTrailingCommaInClosureUseSniff::class, ['onlySingleLine' => true])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Functions\DisallowTrailingCommaInDeclarationSniff::class, ['onlySingleLine' => true])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Namespaces\AlphabeticallySortedUsesSniff::class, ['caseSensitive' => true, 'psr12Compatible' => true])
-  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Namespaces\NamespaceSpacingSniff::class, ['linesCountBeforeNamespace' => 0, 'linesCountAfterNamespace' => 1])
+  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Namespaces\NamespaceSpacingSniff::class, ['linesCountBeforeNamespace' => 1, 'linesCountAfterNamespace' => 1])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Namespaces\ReferenceUsedNamesOnlySniff::class, ['allowFullyQualifiedExceptions' => false, 'searchAnnotations' => true, 'allowFullyQualifiedNameForCollidingClasses' => false, 'allowFullyQualifiedNameForCollidingFunctions' => false, 'allowFullyQualifiedNameForCollidingConstants' => false, 'allowFullyQualifiedGlobalClasses' => false, 'allowFullyQualifiedGlobalFunctions' => false, 'allowFullyQualifiedGlobalConstants' => false, 'allowFallbackGlobalFunctions' => true, 'allowFallbackGlobalConstants' => true, 'allowPartialUses' => true])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Namespaces\UnusedUsesSniff::class, ['searchAnnotations' => true])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Namespaces\UseSpacingSniff::class, ['linesCountBeforeFirstUse' => 1, 'linesCountBetweenUseTypes' => 1, 'linesCountAfterLastUse' => 1])
@@ -62,7 +62,7 @@ return ECSConfig::configure()
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Operators\NegationOperatorSpacingSniff::class, ['spacesCount' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Operators\SpreadOperatorSpacingSniff::class, ['spacesCountAfterOperator' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\PHP\ReferenceSpacingSniff::class, ['spacesCountAfterReference' => 0])
-  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff::class, [])
+  // ->withConfiguredRule(SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff::class, [])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff::class, ['ignoreSpacesInComment' => true])
   ->withRules([
     // PHPCS fixer rules
@@ -270,7 +270,7 @@ return ECSConfig::configure()
     SlevomatCodingStandard\Sniffs\Commenting\EmptyCommentSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\ForbiddenCommentsSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff::class,
-    SlevomatCodingStandard\Sniffs\Commenting\RequireOneLineDocCommentSniff::class,
+    // SlevomatCodingStandard\Sniffs\Commenting\RequireOneLineDocCommentSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\UselessInheritDocCommentSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff::class,
@@ -282,7 +282,7 @@ return ECSConfig::configure()
     SlevomatCodingStandard\Sniffs\ControlStructures\RequireNullCoalesceOperatorSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\RequireNullSafeObjectOperatorSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff::class,
-    SlevomatCodingStandard\Sniffs\ControlStructures\RequireYodaComparisonSniff::class,
+    // SlevomatCodingStandard\Sniffs\ControlStructures\RequireYodaComparisonSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\UselessIfConditionWithReturnSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\UselessTernaryOperatorSniff::class,
     SlevomatCodingStandard\Sniffs\Exceptions\DeadCatchSniff::class,
@@ -327,4 +327,29 @@ return ECSConfig::configure()
     SlevomatCodingStandard\Sniffs\Variables\DisallowSuperGlobalVariableSniff::class,
     SlevomatCodingStandard\Sniffs\Variables\DuplicateAssignmentToVariableSniff::class,
     SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff::class,
+  ])->withSkip([
+    SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff::class => [
+      getcwd() . '/app/Traits',
+      getcwd() . '/app/Policies',
+      getcwd() . '/app/Models',
+    ],
+    SlevomatCodingStandard\Sniffs\Functions\DisallowEmptyFunctionSniff::class => [
+      getcwd() . '/app/Providers',
+    ],
+    SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff::class => [
+      getcwd() . '/app/Models',
+    ],
+    SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff::class => [
+      getcwd() . '/app/Models',
+    ],
+    PhpCsFixer\Fixer\ClassNotation\ClassAttributesSeparationFixer::class => [
+      getcwd() . '/app/Models',
+    ],
+    SlevomatCodingStandard\Sniffs\Classes\ClassStructureSniff::class => [
+      getcwd() . '/app/Models',
+    ],
+    SlevomatCodingStandard\Sniffs\Files\LineLengthSniff::class => [
+      getcwd() . '/database/seeders',
+      getcwd() . '/database/migrations',
+    ],
   ]);

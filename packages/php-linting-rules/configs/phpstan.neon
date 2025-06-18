@@ -51,3 +51,7 @@ parameters:
         - '/Generic type .* in PHPDoc tag @return does not specify all template types of class Illuminate\\Database\\Eloquent\\Relations.*: TRelatedModel, TDeclaringModel/'
         - '#Cannot access property \$[a-zA-Z0-9\\_]+ on App\\Models\\User\|null#'
         - '#Cannot call method [a-zA-Z0-9\\_]+\(\) on App\\Models\\User\|null#'
+        - message: '/Undefined variable: \$this/'
+          path: tests/
+        - identifier: method.childReturnType
+          path: database/factories/
