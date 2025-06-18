@@ -20,7 +20,7 @@ It contains the following linting tools at the moment:
 
 ## 1. Require the composer package
 ```bash
-composer require --dev programic/php-backend-linting
+composer require --dev programic/php-linting-rules
 ```
 
 ## 2. Run the setup command
@@ -44,6 +44,7 @@ composer lint:tlint
 composer lint:phpmd
 composer lint:phpstan
 composer lint:ecs
+composer lint:fix
 ```
 
 ## Editor Setup
