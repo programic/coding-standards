@@ -54,4 +54,4 @@ parameters:
         - message: '/Undefined variable: \$this/'
           path:  %currentWorkingDirectory%/tests/
         - identifier: method.childReturnType
-          path: %currentWorkingDirectory%/database/factories
+          path: %currentWorkingDirectory%/database/factories/
