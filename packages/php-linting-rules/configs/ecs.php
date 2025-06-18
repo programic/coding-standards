@@ -37,6 +37,7 @@ return ECSConfig::configure()
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Attributes\AttributeAndTargetSpacingSniff::class, ['linesCount' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\BackedEnumTypeSpacingSniff::class, ['spacesCountBeforeColon' => 0, 'spacesCountBeforeType' => 1])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\ClassMemberSpacingSniff::class, ['linesCountBetweenMembers' => 1])
+  // ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\EmptyLinesAroundClassBracesSniff::class, ['linesCountAfterOpeningBrace' => 0, 'linesCountBeforeClosingBrace' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\ConstantSpacingSniff::class, ['minLinesCountBeforeWithComment' => 1, 'maxLinesCountBeforeWithComment' => 1, 'minLinesCountBeforeWithoutComment' => 0, 'maxLinesCountBeforeWithoutComment' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\EnumCaseSpacingSniff::class, ['minLinesCountBeforeWithComment' => 1, 'maxLinesCountBeforeWithComment' => 1, 'minLinesCountBeforeWithoutComment' => 0, 'maxLinesCountBeforeWithoutComment' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\MethodSpacingSniff::class, ['minLinesCount' => 1, 'maxLinesCount' => 1])
@@ -45,7 +46,9 @@ return ECSConfig::configure()
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Classes\TraitUseSpacingSniff::class, ['linesCountBeforeFirstUse' => 0, 'linesCountBeforeFirstUseWhenFirstInClass' => 0, 'linesCountBetweenUses' => 0, 'linesCountAfterLastUse' => 1, 'linesCountAfterLastUseWhenLastInClass' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Commenting\DocCommentSpacingSniff::class, ['linesCountBeforeFirstContent' => 0, 'linesCountBetweenDescriptionAndAnnotations' => 1, 'linesCountBetweenDifferentAnnotationsTypes' => 0, 'linesCountAfterLastContent' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\ControlStructures\JumpStatementsSpacingSniff::class, ['linesCountBefore' => 1, 'linesCountBeforeFirst' => 0, 'linesCountBeforeWhenFirstInCaseOrDefault' => 1, 'linesCountAfter' => 0, 'linesCountAfterLast' => 0, 'linesCountAfterWhenLastInCaseOrDefault' => 0, 'linesCountAfterWhenLastInLastCaseOrDefault' => 0, 'jumpStatements' => ['continue', 'break', 'yield', 'return', 'goto']])
+  // ->withConfiguredRule(SlevomatCodingStandard\Sniffs\ControlStructures\BlockControlStructureSpacingSniff::class, ['linesCountBefore' => 1, 'linesCountBeforeFirst' => 1, 'linesCountAfter' => 1, 'linesCountAfterLast' => 1, 'controlStructures' => ['if', 'switch', 'for', 'foreach', 'while', 'do']])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Files\LineLengthSniff::class, ['lineLengthLimit' => 140])
+  // ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Files\TypeNameMatchesFileNameSniff::class, ['rootNamespaces' => ['app' => 'App'], 'skipDirs' => ['database/seeders', 'database/factories', 'tests'] ])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Functions\ArrowFunctionDeclarationSniff::class, ['spacesCountAfterKeyword' => 1, 'spacesCountBeforeArrow' => 1, 'spacesCountAfterArrow' => 1, 'allowMultiLine' => true])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Functions\DisallowTrailingCommaInCallSniff::class, ['onlySingleLine' => true])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Functions\DisallowTrailingCommaInClosureUseSniff::class, ['onlySingleLine' => true])
@@ -59,6 +62,7 @@ return ECSConfig::configure()
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Operators\NegationOperatorSpacingSniff::class, ['spacesCount' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Operators\SpreadOperatorSpacingSniff::class, ['spacesCountAfterOperator' => 0])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\PHP\ReferenceSpacingSniff::class, ['spacesCountAfterReference' => 0])
+  //  ->withConfiguredRule(SlevomatCodingStandard\Sniffs\TypeHints\DeclareStrictTypesSniff::class, [])
   ->withConfiguredRule(SlevomatCodingStandard\Sniffs\Whitespaces\DuplicateSpacesSniff::class, ['ignoreSpacesInComment' => true])
   ->withRules([
     // PHPCS fixer rules
@@ -266,6 +270,7 @@ return ECSConfig::configure()
     SlevomatCodingStandard\Sniffs\Commenting\EmptyCommentSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\ForbiddenCommentsSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\InlineDocCommentDeclarationSniff::class,
+    // SlevomatCodingStandard\Sniffs\Commenting\RequireOneLineDocCommentSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\UselessFunctionDocCommentSniff::class,
     SlevomatCodingStandard\Sniffs\Commenting\UselessInheritDocCommentSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\AssignmentInConditionSniff::class,
@@ -277,6 +282,7 @@ return ECSConfig::configure()
     SlevomatCodingStandard\Sniffs\ControlStructures\RequireNullCoalesceOperatorSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\RequireNullSafeObjectOperatorSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\RequireShortTernaryOperatorSniff::class,
+    // SlevomatCodingStandard\Sniffs\ControlStructures\RequireYodaComparisonSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\UselessIfConditionWithReturnSniff::class,
     SlevomatCodingStandard\Sniffs\ControlStructures\UselessTernaryOperatorSniff::class,
     SlevomatCodingStandard\Sniffs\Exceptions\DeadCatchSniff::class,
@@ -284,6 +290,7 @@ return ECSConfig::configure()
     SlevomatCodingStandard\Sniffs\Exceptions\ReferenceThrowableOnlySniff::class,
     SlevomatCodingStandard\Sniffs\Exceptions\RequireNonCapturingCatchSniff::class,
     SlevomatCodingStandard\Sniffs\Functions\DisallowEmptyFunctionSniff::class,
+    // SlevomatCodingStandard\Sniffs\Functions\DisallowNamedArgumentsSniff::class,
     SlevomatCodingStandard\Sniffs\Functions\NamedArgumentSpacingSniff::class,
     SlevomatCodingStandard\Sniffs\Functions\RequireTrailingCommaInCallSniff::class,
     SlevomatCodingStandard\Sniffs\Functions\RequireTrailingCommaInClosureUseSniff::class,
