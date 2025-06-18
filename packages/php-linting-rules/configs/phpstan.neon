@@ -52,6 +52,6 @@ parameters:
         - '#Cannot access property \$[a-zA-Z0-9\\_]+ on App\\Models\\User\|null#'
         - '#Cannot call method [a-zA-Z0-9\\_]+\(\) on App\\Models\\User\|null#'
         - message: '/Undefined variable: \$this/'
-          path:  %currentWorkingDirectory%/tests
+          path:  %currentWorkingDirectory%/tests/
         - identifier: method.childReturnType
           path: %currentWorkingDirectory%/database/factories
