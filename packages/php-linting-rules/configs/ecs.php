@@ -360,5 +360,5 @@ return ECSConfig::configure()
     ],
     SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff::class => [
       getcwd() . '/app/Models/User/User.php',
-    ]
+    ],
   ]);
