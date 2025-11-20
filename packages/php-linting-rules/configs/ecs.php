@@ -327,4 +327,29 @@ return ECSConfig::configure()
     SlevomatCodingStandard\Sniffs\Variables\DisallowSuperGlobalVariableSniff::class,
     SlevomatCodingStandard\Sniffs\Variables\DuplicateAssignmentToVariableSniff::class,
     SlevomatCodingStandard\Sniffs\Variables\UnusedVariableSniff::class,
+  ])
+  ->withSkip([
+    PhpCsFixer\Fixer\AttributeNotation\OrderedAttributesFixer::class => [
+      getcwd() . '/app/Data',
+    ],
+    SlevomatCodingStandard\Sniffs\Functions\UnusedParameterSniff::class => [
+      getcwd() . '/app/Models',
+      getcwd() . '/app/Policies',
+      getcwd() . '/app/Repositories/QuerySorts',
+      getcwd() . '/app/Scopes',
+      getcwd() . '/app/Traits',
+      getcwd() . '/app/Data/Casts',
+      getcwd() . '/app/Providers',
+    ],
+    SlevomatCodingStandard\Sniffs\TypeHints\PropertyTypeHintSniff::class => [
+      getcwd() . '/app/Console/Commands',
+      getcwd() . '/app/Models',
+    ],
+    SlevomatCodingStandard\Sniffs\TypeHints\ParameterTypeHintSniff::class => [
+      getcwd() . '/app/Data/Casts',
+      getcwd() . '/app/Models/User/User.php',
+    ],
+    SlevomatCodingStandard\Sniffs\TypeHints\ReturnTypeHintSniff::class => [
+      getcwd() . '/app/Models/User/User.php',
+    ],
   ]);
